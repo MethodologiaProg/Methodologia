@@ -44,9 +44,9 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jEmail.setText("jTextField1");
+        jEmail.setText("user2@methprog.com");
 
-        jPassword.setText("jTextField1");
+        jPassword.setText("user2");
 
         jLabel1.setText("Email:");
 

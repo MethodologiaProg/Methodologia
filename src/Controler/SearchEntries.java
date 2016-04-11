@@ -25,8 +25,8 @@ public class SearchEntries {
             stmt = con.createStatement();
             rs = stmt.executeQuery("select * from entries");
             while(rs.next()){
-                System.out.println("Entry ID="+rs.getInt("id")+", Address="+rs.getString("address")+", city="+rs.getString("city")+", Country="+rs.getString("country"));                 
-                Entries.add(new Entry(rs.getInt("id"), rs.getInt("user"), rs.getString("address"), rs.getString("city"),rs.getString("country")));
+                System.out.println("Entry ID="+rs.getInt("id")+", Address="+rs.getString("address")+", city="+rs.getString("city")+", Country="+rs.getString("country")+", Price="+rs.getString("price")+", Title="+rs.getString("title"));                 
+                Entries.add(new Entry(rs.getInt("id"), rs.getInt("user"), rs.getString("address"), rs.getString("city"),rs.getString("country"), rs.getInt("price"), rs.getString("title")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,6 +40,61 @@ public class SearchEntries {
                 }
         }
         return Entries;
+    }
+    
+    public List<Entry> GetEntriesByKeyword(String keyword, int price){
+        DataSource ds = ConnectToDatabase.getDatasource();
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ds.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("select * from entries where title like '%"+keyword+"%' and price<="+price);
+            while(rs.next()){
+                System.out.println("Entry ID="+rs.getInt("id")+", Address="+rs.getString("address")+", city="+rs.getString("city")+", Country="+rs.getString("country")+", Price="+rs.getString("price")+", Title="+rs.getString("title"));                 
+                Entries.add(new Entry(rs.getInt("id"), rs.getInt("user"), rs.getString("address"), rs.getString("city"),rs.getString("country"), rs.getInt("price"), rs.getString("title")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+                try {
+                    if(rs != null) rs.close();
+                    if(stmt != null) stmt.close();
+                    if(con != null) con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+        return Entries;
+    }
+    
+    public List<Entry> GetEntriesByPrice(int price){
+        DataSource ds = ConnectToDatabase.getDatasource();
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ds.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("select * from entries where price <="+price);
+            while(rs.next()){
+                System.out.println("Entry ID="+rs.getInt("id")+", Address="+rs.getString("address")+", city="+rs.getString("city")+", Country="+rs.getString("country")+", Price="+rs.getString("price")+", Title="+rs.getString("title"));                 
+                Entries.add(new Entry(rs.getInt("id"), rs.getInt("user"), rs.getString("address"), rs.getString("city"),rs.getString("country"), rs.getInt("price"), rs.getString("title")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+                try {
+                    if(rs != null) rs.close();
+                    if(stmt != null) stmt.close();
+                    if(con != null) con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+        return Entries;
+        
     }
     
     
