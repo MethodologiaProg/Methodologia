@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controler;
 
 import Model.User;
@@ -14,10 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.sql.DataSource;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Hrystos
- */
+
 public class Authenticate {
     
     
