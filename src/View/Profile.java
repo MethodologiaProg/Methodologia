@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Model.User;
 
 public class Profile extends javax.swing.JFrame {
+    User user;
 
     /**
      * Creates new form Profile
@@ -17,11 +13,10 @@ public class Profile extends javax.swing.JFrame {
         
     }
     public void setProfileInfo(User user){
+        this.user = user;
         jtxtName.setText(user.getName());
         jtxtLastName.setText(user.getLast_name());
-        jtxtEmail.setText(user.getEmail());
-        
-        
+        jtxtEmail.setText(user.getEmail());     
     }
 
     /**
@@ -176,9 +171,19 @@ public class Profile extends javax.swing.JFrame {
 
         jButton2.setText("Create Entry");
         jButton2.setFocusPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("View My Entries");
         jButton3.setFocusPainted(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Search Entries");
         jButton4.setFocusPainted(false);
@@ -224,6 +229,14 @@ public class Profile extends javax.swing.JFrame {
         Entries entries = new Entries();
         entries.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new CreateEntry(user.getId()).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new ViewMyEntries(user.getId()).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
