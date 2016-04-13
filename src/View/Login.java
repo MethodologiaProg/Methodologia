@@ -44,10 +44,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jEmail.setText("user2@methprog.com");
-
-        jPassword.setText("user2");
-
         jLabel1.setText("Email:");
 
         jLabel2.setText("Password:");
@@ -96,6 +92,11 @@ public class Login extends javax.swing.JFrame {
         );
 
         jButton2.setText("Create New Account");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("I forgot my password!");
 
@@ -134,6 +135,11 @@ public class Login extends javax.swing.JFrame {
         if(Authenticate(email, password)) DestroyForm(); 
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        new CreateAccount().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
