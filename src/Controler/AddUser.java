@@ -11,10 +11,6 @@ public class AddUser {
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
         Statement stmt = null;
-        System.out.println(email);
-        System.out.println(password);
-        System.out.println(name);
-        System.out.println(lastname);
         try {
             con = ds.getConnection();
             stmt = con.createStatement();

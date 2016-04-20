@@ -135,9 +135,11 @@ public class CreateAccount extends javax.swing.JFrame {
         else
         {
             AddUser addUser = new AddUser(jEmail.getText(), jPassword.getText(), jName.getText(), jLastName.getText());
+            this.dispose();
+            new Login().setVisible(true);
         }
-        this.dispose();
-        new Login().setVisible(true);
+        
+        
         
     }//GEN-LAST:event_jCreateBtnActionPerformed
 

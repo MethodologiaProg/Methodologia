@@ -132,7 +132,7 @@ public class CreateEntry extends javax.swing.JFrame {
         else
         {
             AddEntry addEntry = new AddEntry(jTitle.getText(), Integer.parseInt(jPrice.getText()), jCountry.getText(), jCity.getText(), jAddress.getText(), userId);
-            JOptionPane.showMessageDialog(frame,"User Id:"+userId);
+            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
