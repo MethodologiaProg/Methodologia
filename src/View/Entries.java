@@ -1,13 +1,23 @@
 package View;
+
+import Controler.Interest;
 import Controler.SearchEntries;
 import Model.Entry;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
@@ -24,7 +34,7 @@ public class Entries extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSearchTools;
     private javax.swing.JLabel jPriceLabel;
     private javax.swing.JSlider jSlider1;
-
+    private String descriptionText;
     
     private TitledBorder border;
     Border blackline;
@@ -39,23 +49,66 @@ public class Entries extends javax.swing.JFrame {
         
     }
     
-    private void GetAllEntries(){        
-        
-    }
-    
     private void PrintEntries(){
-        entries.stream().forEach((temp) -> {           
-            Box box = Box.createVerticalBox();
-            box.add(Box.createRigidArea(new Dimension(5, 5)));
-            jPanelEntries.add(box);            
-            box.add(new JLabel("Street: " + temp.getAddress()));
-            box.add(new JLabel("City: " + temp.getCity()));
-            box.add(new JLabel("Country: " + temp.getCountry()));
-            box.add(new JLabel("Price: " + temp.getPrice() + "€"));
-//            box.add(new JButton(Integer.toString(temp.getId())));
-            box.add(new JButton("Endiaferomai"));
+        entries.stream().forEach((Entry temp) -> {  
+            Box outerBox = Box.createHorizontalBox();
+            
+            Box innerBoxFirst = Box.createVerticalBox();
+            Box innerBoxSecond = Box.createHorizontalBox();
+            innerBoxFirst.add(Box.createRigidArea(new Dimension(5, 5)));
+            innerBoxSecond.add(Box.createRigidArea(new Dimension(5, 5)));
+            
+            outerBox.add(innerBoxFirst);
+            outerBox.add(innerBoxSecond);
+            
+            jPanelEntries.add(outerBox);    
+            //JLabel JId = new JLabel(Integer.toString(temp.getId()));
+            //JId.setVisible(false);           
+            //innerBoxFirst.add(JId);
+            innerBoxFirst.add(new JLabel("Street: " + temp.getAddress()));
+            innerBoxFirst.add(new JLabel("City: " + temp.getCity()));
+            innerBoxFirst.add(new JLabel("Country: " + temp.getCountry()));
+            innerBoxFirst.add(new JLabel("Price: " + temp.getPrice() + "€"));
+            JButton button = new JButton("Ενδιαφέρομαι !");
+            button.addActionListener( new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    new Interest(temp.getId());
+                    button.setEnabled(false);
+                }
+            });
+            innerBoxFirst.add(button);           
+
+            
+            descriptionText = String.format("<html><div style=\"width:%dpx;\">%s</div><html>", 100, temp.getDescription());
+            innerBoxSecond.add(new JLabel(descriptionText));
+            JButton viewEntry = new JButton("Περισσότερα...");
+            viewEntry.addActionListener( new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    ViewEntry entry = new ViewEntry(temp);
+                    entry.setVisible(true);
+                }
+            });
+            innerBoxFirst.add(viewEntry);
             border = BorderFactory.createTitledBorder(blackline, temp.getTitle());
-            box.setBorder(border);
+            outerBox.setBorder(border);
+            
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(new File(temp.getPhoto()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Image dimg = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            innerBoxSecond.add(new JLabel(imageIcon));
+            
+            
         });
         entries.clear();
     }
@@ -73,9 +126,11 @@ public class Entries extends javax.swing.JFrame {
         jKeywordField = new javax.swing.JTextField();
         jPriceLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        
 
         jPanelSearchTools.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         
@@ -87,7 +142,7 @@ public class Entries extends javax.swing.JFrame {
             }
         });
 
-        jSlider1.setMaximum(50000);
+        jSlider1.setMaximum(1000000);
         jSlider1.setValue(0);
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             @Override
@@ -162,6 +217,7 @@ public class Entries extends javax.swing.JFrame {
         jPanelEntries = new javax.swing.JPanel();
         jPanelEntries.setLayout(new javax.swing.BoxLayout(jPanelEntries, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(jPanelEntries);
+        
 
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,8 +244,7 @@ public class Entries extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
                     .addContainerGap()))
         );
-        jPanelEntries.setLayout(new GridLayout(0,1));//test
-
+        jPanelEntries.setLayout(new GridLayout(0,1));
         pack();
     }
     
@@ -199,33 +254,31 @@ public class Entries extends javax.swing.JFrame {
         List<Entry> temp = new ArrayList<>();
         List<Entry> keyword = new ArrayList<>();
         List<Entry> price = new ArrayList<>();
+        String keywordString = jKeywordField.getText().trim();
+        int priceInt = jSlider1.getValue();
         
-        keyword.addAll(se.GetEntriesByKeyword(jKeywordField.getText(),jSlider1.getValue()));
- 
-        //price.addAll(se.GetEntriesByPrice(jSlider1.getValue()));
-        entries.removeAll(keyword);
-        entries.addAll(keyword);
-        
-        
+        if((keywordString.equals("")) && (priceInt == 0)){
+            System.out.println("getAllEntries");
+            entries.addAll(se.getAllEntries());
+        }else if(!keywordString.equals("") && priceInt == 0 ){
+            System.out.println("getEntriesByKeyword");
+            entries.addAll(se.GetEntriesByKeyword(keywordString));
+        }else if(keywordString.equals("") && priceInt != 0){
+            System.out.println("getEntriesByPrice");
+            entries.addAll(se.GetEntriesByPrice(priceInt));
+        }else if(!keyword.equals("") && priceInt != 0 ){
+            System.out.println("getEntries by keyword and price");
+            entries.addAll(se.GetEntriesByKeywordAndPrice(keywordString, priceInt));
+        } 
+
+        keyword.clear();
+        price.clear();
         PrintEntries();
 
                                 
     }
     
-
-    
-//    private <T> Set<T> findDuplicates(Collection<T> list) {
-//        Set<T> duplicates = new LinkedHashSet<>();
-//        Set<T> uniques = new HashSet<>();
-//        for(T t : list) {
-//            if(!uniques.add(t)) {
-//                duplicates.add(t);
-//            }
-//        }
-//        return duplicates;
-//    }
-    
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {                                      
+        private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {                                      
         jPriceLabel.setText(String.valueOf(jSlider1.getValue()));
     }
     

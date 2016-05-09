@@ -6,8 +6,16 @@ import java.util.List;
 import Controler.SearchEntries;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
@@ -19,6 +27,7 @@ public class ViewMyEntries extends javax.swing.JFrame {
     List<Entry> myEntries = new ArrayList<>();
     private TitledBorder border;
     Border blackline;
+    private String descriptionText;
     
     /**
      * Creates new form ViewMyEntries
@@ -32,19 +41,68 @@ public class ViewMyEntries extends javax.swing.JFrame {
     }
     
     private void PrintEntries(){
-        myEntries.stream().forEach((temp) -> {           
-            Box box = Box.createVerticalBox();
-            box.add(Box.createRigidArea(new Dimension(5, 5)));
-            jPanelEntries.add(box);            
-            box.add(new JLabel("Street: " + temp.getAddress()));
-            box.add(new JLabel("City: " + temp.getCity()));
-            box.add(new JLabel("Country: " + temp.getCountry()));
-            box.add(new JLabel("Price: " + temp.getPrice() + "€"));
-//            box.add(new JButton(Integer.toString(temp.getId())));
-//            box.add(new JButton("Endiaferomai"));
+        myEntries.stream().forEach((Entry temp) -> {  
+            Box outerBox = Box.createHorizontalBox();
+            
+            Box innerBoxFirst = Box.createVerticalBox();
+            Box innerBoxSecond = Box.createHorizontalBox();
+            innerBoxFirst.add(Box.createRigidArea(new Dimension(5, 5)));
+            innerBoxSecond.add(Box.createRigidArea(new Dimension(5, 5)));
+            
+            outerBox.add(innerBoxFirst);
+            outerBox.add(innerBoxSecond);
+            
+            jPanelEntries.add(outerBox);    
+            JLabel JId = new JLabel(Integer.toString(temp.getId()));
+            JId.setVisible(false);           
+            innerBoxFirst.add(JId);
+            innerBoxFirst.add(new JLabel("Street: " + temp.getAddress()));
+            innerBoxFirst.add(new JLabel("City: " + temp.getCity()));
+            innerBoxFirst.add(new JLabel("Country: " + temp.getCountry()));
+            innerBoxFirst.add(new JLabel("Price: " + temp.getPrice() + "€"));         
+            JButton button = new JButton("Delete");
+            button.addActionListener( new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    System.out.println(JId.getText());
+                }
+            });
+            innerBoxFirst.add(button); 
+            JButton viewEntry = new JButton("Περισσότερα...");
+            viewEntry.addActionListener( new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    System.out.println(JId.getText());
+                    ViewEntry entry = new ViewEntry(temp);
+                    entry.setVisible(true);
+                }
+            });
+            
+            innerBoxFirst.add(viewEntry);
+            
+            descriptionText = String.format("<html><div style=\"width:%dpx;\">%s</div><html>", 100, temp.getDescription());
+            innerBoxSecond.add(new JLabel(descriptionText));
+            innerBoxSecond.add(new JLabel(temp.getNumberOfPeopleInterested(temp.getId())+" are interested."));
             border = BorderFactory.createTitledBorder(blackline, temp.getTitle());
-            box.setBorder(border);
+            outerBox.setBorder(border);
+            
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(new File(temp.getPhoto()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Image dimg = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            innerBoxSecond.add(new JLabel(imageIcon));
+            
+            
         });
+        myEntries.clear();
     }
     
 
@@ -57,14 +115,32 @@ public class ViewMyEntries extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelEntries = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Your Entries");
         setResizable(false);
 
         jPanelEntries.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(jPanelEntries);
+
+        jTabbedPane1.addTab("My Entries", jScrollPane1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Entries I'm Interested", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,14 +148,14 @@ public class ViewMyEntries extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -88,7 +164,9 @@ public class ViewMyEntries extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelEntries;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

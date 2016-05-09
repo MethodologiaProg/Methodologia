@@ -1,5 +1,7 @@
 package Model;
 
+import Controler.FindUser;
+
 
 public class User {
     private int id;
@@ -7,15 +9,17 @@ public class User {
     private String last_name;
     private int age;
     private String email;
+    private String photo;
 
 
     
-    public User(int id, String name, String last_name, String email){
+    public User(int id, String name, String last_name, String email, String photo){
         this.id = id;
         this.name = name;
         this.last_name = last_name;
 //        this.age = age;
         this.email = email;
+        this.photo = photo;
     }
     
 
@@ -65,6 +69,15 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public String getPhoto() {
+        return photo;
+    }
+
+
+    public void setPhoto(String email) {
+        this.photo = photo;
     }
     
     

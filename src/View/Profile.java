@@ -1,6 +1,13 @@
 package View;
 
 import Model.User;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Profile extends javax.swing.JFrame {
     User user;
@@ -16,7 +23,20 @@ public class Profile extends javax.swing.JFrame {
         this.user = user;
         jtxtName.setText(user.getName());
         jtxtLastName.setText(user.getLast_name());
-        jtxtEmail.setText(user.getEmail());     
+        jtxtEmail.setText(user.getEmail());
+        //jPanel2.add(new JLabel(user.getPhoto()));
+        
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(user.getPhoto()));
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        Image dimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon imageIcon = new ImageIcon(dimg);
+        jPanel2.add(new JLabel(imageIcon));
     }
 
     /**
@@ -31,10 +51,7 @@ public class Profile extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jtxtAge = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtxtEmail = new javax.swing.JLabel();
         jtxtLastName = new javax.swing.JLabel();
@@ -46,6 +63,7 @@ public class Profile extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Profile");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -55,34 +73,10 @@ public class Profile extends javax.swing.JFrame {
         jButton1.setFocusable(false);
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel5.setText("img PLACEHOLDER");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addContainerGap())
-        );
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 100));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel3.setAutoscrolls(true);
-
-        jtxtAge.setText("jtxtAge");
-        jtxtAge.setAutoscrolls(true);
-
-        jLabel3.setText("Ηλικία");
-        jLabel3.setAutoscrolls(true);
 
         jLabel4.setText("E-mail");
         jLabel4.setAutoscrolls(true);
@@ -110,16 +104,14 @@ public class Profile extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtAge)
                     .addComponent(jtxtName)
                     .addComponent(jtxtLastName)
                     .addComponent(jtxtEmail))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,10 +128,6 @@ public class Profile extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtEmail)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtAge)
-                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -152,8 +140,8 @@ public class Profile extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,7 +151,7 @@ public class Profile extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -206,7 +194,7 @@ public class Profile extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -280,13 +268,10 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel jtxtAge;
     private javax.swing.JLabel jtxtEmail;
     private javax.swing.JLabel jtxtLastName;
     private javax.swing.JLabel jtxtName;

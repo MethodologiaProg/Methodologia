@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 public class Authenticate {
-    
+    public static int currentUserId;
     
     public static boolean Authenticate(String email, String password){
         DataSource ds = ConnectToDatabase.getDatasource();
@@ -26,17 +26,18 @@ public class Authenticate {
         try {
             con = ds.getConnection();
             stmt = con.createStatement();
-            rs = stmt.executeQuery("select id, email, password, first_name, last_name from users where email='"+email+"' and password='"+password+"'");
+            rs = stmt.executeQuery("select id, email, password, first_name, last_name, profile_pic  from users where email='"+email+"' and password='"+password+"'");
             while(rs.next()){
                 count++;
             }
             rs.first();
             if(count==1){
-                System.out.println("User ID="+rs.getInt("id")+", Email="+rs.getString("email")+", Name="+rs.getString("first_name")+", Last Name="+rs.getString("last_name"));
-                user = new User(rs.getInt("id"),rs.getString("first_name"),rs.getString("last_name"),rs.getString("email"));
+                user = new User(rs.getInt("id"),rs.getString("first_name"),rs.getString("last_name"),rs.getString("email"), rs.getString("profile_pic"));
                 pr.setProfileInfo(user);
                 pr.setVisible(true);
                 returnvalue = true;
+                
+                currentUserId = rs.getInt("id");
                 
             }
             else{

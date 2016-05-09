@@ -2,15 +2,23 @@ package View;
 
 import Controler.AddUser;
 import java.awt.Component;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CreateAccount extends javax.swing.JFrame {
 
+    final JFileChooser fc = new JFileChooser();
+    File photoFile;
     /**
      * Creates new form CreateAccount
      */
     public CreateAccount() {
         initComponents();
+        jLabel6.setVisible(false);
+        jPhoto.setVisible(false);
+        jButton1.setVisible(false);
     }
 
     /**
@@ -33,6 +41,9 @@ public class CreateAccount extends javax.swing.JFrame {
         jLastName = new javax.swing.JTextField();
         jBirthday = new javax.swing.JTextField();
         jCreateBtn = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jPhoto = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create Account");
@@ -65,35 +76,48 @@ public class CreateAccount extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Profile Picture:");
+        jLabel6.setToolTipText("");
+
+        jPhoto.setEnabled(false);
+
+        jButton1.setText("...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCreateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBirthday))
-                    .addComponent(jCreateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jEmail)
+                            .addComponent(jPassword)
+                            .addComponent(jName)
+                            .addComponent(jLastName)
+                            .addComponent(jBirthday))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,8 +143,13 @@ public class CreateAccount extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCreateBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -132,18 +161,31 @@ public class CreateAccount extends javax.swing.JFrame {
         else if("".equals(jPassword.getText().trim())) JOptionPane.showMessageDialog(frame,"Enter Password.");
         else if("".equals(jName.getText().trim())) JOptionPane.showMessageDialog(frame,"Enter your name.");
         else if("".equals(jLastName.getText().trim())) JOptionPane.showMessageDialog(frame,"Enter your last name.");
+        //else if("".equals(jPhoto.getText().trim())) JOptionPane.showMessageDialog(frame,"Enter your last name.");
         else
         {
-            AddUser addUser = new AddUser(jEmail.getText(), jPassword.getText(), jName.getText(), jLastName.getText());
-        }
-        this.dispose();
-        new Login().setVisible(true);
+            AddUser addUser = new AddUser(jEmail.getText(), jPassword.getText(), jName.getText(), jLastName.getText(), jPhoto.getText());
+            this.dispose();
+            new Login().setVisible(true);
+        }        
         
     }//GEN-LAST:event_jCreateBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "gif", "png", "jpeg");
+        fc.setFileFilter(filter);
+        int returnVal = fc.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            //System.out.println("You chose to open this file: " + fc.getSelectedFile().getAbsolutePath());
+            jPhoto.setText(fc.getSelectedFile().getName());
+            photoFile = fc.getSelectedFile();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jBirthday;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jCreateBtn;
     private javax.swing.JTextField jEmail;
     private javax.swing.JLabel jLabel1;
@@ -151,8 +193,10 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jLastName;
     private javax.swing.JTextField jName;
     private javax.swing.JTextField jPassword;
+    private javax.swing.JTextField jPhoto;
     // End of variables declaration//GEN-END:variables
 }
