@@ -9,7 +9,26 @@
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
--- Dumping data for table methprog.comments: ~11 rows (approximately)
+
+-- Dumping database structure for methprog
+CREATE DATABASE IF NOT EXISTS `methprog` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `methprog`;
+
+
+-- Dumping structure for table methprog.comments
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `senter` int(11) DEFAULT NULL,
+  `entry` int(11) DEFAULT NULL,
+  `message` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `SenterId` (`senter`),
+  KEY `entry` (`entry`),
+  CONSTRAINT `SenterId` FOREIGN KEY (`senter`) REFERENCES `users` (`id`),
+  CONSTRAINT `entry` FOREIGN KEY (`entry`) REFERENCES `entries` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table methprog.comments: ~13 rows (approximately)
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
 INSERT INTO `comments` (`id`, `senter`, `entry`, `message`) VALUES
 	(1, 1, 1, 'This is a test Comment 1'),
@@ -26,6 +45,23 @@ INSERT INTO `comments` (`id`, `senter`, `entry`, `message`) VALUES
 	(12, 3, 4, 'Is this a quite neighborhood?'),
 	(13, 8, 1, 'Hello world');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+
+
+-- Dumping structure for table methprog.entries
+CREATE TABLE IF NOT EXISTS `entries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `city` text COLLATE utf8_unicode_ci NOT NULL,
+  `country` text COLLATE utf8_unicode_ci NOT NULL,
+  `price` int(11) DEFAULT NULL,
+  `title` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci,
+  `photo` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__users` (`user`),
+  CONSTRAINT `FK__users` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table methprog.entries: ~12 rows (approximately)
 /*!40000 ALTER TABLE `entries` DISABLE KEYS */;
@@ -44,7 +80,20 @@ INSERT INTO `entries` (`id`, `user`, `address`, `city`, `country`, `price`, `tit
 	(12, 11, 'asdfae', 'asdf', 'asdf', 65432, 'asdfasdf', 'efasefsda', 'C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/photos/entries/no_photo.png');
 /*!40000 ALTER TABLE `entries` ENABLE KEYS */;
 
--- Dumping data for table methprog.intrest: ~8 rows (approximately)
+
+-- Dumping structure for table methprog.intrest
+CREATE TABLE IF NOT EXISTS `intrest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `entryId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userID` (`userId`),
+  KEY `entryID` (`entryId`),
+  CONSTRAINT `entryID` FOREIGN KEY (`entryId`) REFERENCES `entries` (`id`),
+  CONSTRAINT `userID` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table methprog.intrest: ~9 rows (approximately)
 /*!40000 ALTER TABLE `intrest` DISABLE KEYS */;
 INSERT INTO `intrest` (`id`, `userId`, `entryId`) VALUES
 	(1, 1, 1),
@@ -58,7 +107,20 @@ INSERT INTO `intrest` (`id`, `userId`, `entryId`) VALUES
 	(9, 1, 3);
 /*!40000 ALTER TABLE `intrest` ENABLE KEYS */;
 
--- Dumping data for table methprog.users: ~9 rows (approximately)
+
+-- Dumping structure for table methprog.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` text COLLATE utf8_unicode_ci NOT NULL,
+  `password` text COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` text COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` text COLLATE utf8_unicode_ci NOT NULL,
+  `birth_date` text COLLATE utf8_unicode_ci,
+  `profile_pic` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table methprog.users: ~8 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `birth_date`, `profile_pic`) VALUES
 	(1, 'user1@methprog.com', 'user1', 'Maria', 'Maraki', NULL, 'C:\\Users\\Hrystos\\Documents\\NetBeansProjects\\Methodologia\\photos\\users\\1.jpg'),
