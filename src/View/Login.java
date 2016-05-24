@@ -5,6 +5,9 @@
  */
 package View;
 import static Controler.Authenticate.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 
 public class Login extends javax.swing.JFrame {
@@ -14,6 +17,23 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent we)
+            { 
+              String ObjButtons[] = {"Yes","No"};
+              int PromptResult = JOptionPane.showOptionDialog(null, 
+                  "Confirm your exit", "Exit", 
+                  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, 
+                  ObjButtons,ObjButtons[1]);
+              if(PromptResult==0)
+              {
+                System.exit(0);
+                
+              }
+            }
+          });
     }
     
     public void DestroyForm(){
@@ -39,7 +59,7 @@ public class Login extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Login");
         setResizable(false);
 

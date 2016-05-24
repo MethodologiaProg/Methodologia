@@ -47,7 +47,21 @@ public class Entries extends javax.swing.JFrame {
         initComponents();
         RepaintEntriesPanel();
         blackline = BorderFactory.createLineBorder(Color.black);
-        
+        GettingStarted();
+    }
+    private void GettingStarted(){
+        Box box = Box.createVerticalBox();
+        box.add(Box.createRigidArea(new Dimension(100,20)));
+        box.add(new JLabel("To show all the avaliable entries"));
+        box.add(new JLabel("leave the keyword and the price filters empty"));
+        box.add(new JLabel("and click search!"));
+        jPanelEntries.add(box);
+        Box box2 = Box.createVerticalBox();
+        box2.add(Box.createRigidArea(new Dimension(100,20)));
+        box2.add(new JLabel("Use the keyword filter"));
+        box2.add(new JLabel("to search an entry with the specific word"));
+        box2.add(new JLabel("in the title or the description!"));
+        jPanelEntries.add(box2);
     }
     
     private void PrintEntries(){
@@ -112,6 +126,7 @@ public class Entries extends javax.swing.JFrame {
             
             
         });
+        jPanelEntries.add(new JLabel("You reach the end"));
         entries.clear();
     }
     

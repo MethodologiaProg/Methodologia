@@ -2,12 +2,15 @@ package View;
 
 import Model.User;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Profile extends javax.swing.JFrame {
     User user;
@@ -17,6 +20,25 @@ public class Profile extends javax.swing.JFrame {
      */
     public Profile() {
         initComponents();
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent we)
+            { 
+              String ObjButtons[] = {"Yes","No"};
+              int PromptResult = JOptionPane.showOptionDialog(null, 
+                  "Are you sure you want to logout? \n Clicking yes will return you to the login screen", "Logout", 
+                  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, 
+                  ObjButtons,ObjButtons[1]);
+              if(PromptResult==0)
+              {
+                dispose();
+                Login login = new Login();
+                login.setVisible(true);
+                
+              }
+            }
+          });
         
     }
     public void setProfileInfo(User user){
@@ -62,7 +84,7 @@ public class Profile extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Profile");
         setResizable(false);
 
