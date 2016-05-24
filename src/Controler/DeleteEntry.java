@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controler;
 
 import java.sql.Connection;
@@ -11,17 +7,18 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 
-public class AddEntry {
+public class DeleteEntry {
     
-    public AddEntry(String title, int price, String country, String city, String address, int userId, String description) {
+    
+    
+    public DeleteEntry(int id){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
         Statement stmt = null;
-        String photo = "C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/photos/entries/no_photo.png";
         try {
             con = ds.getConnection();
             stmt = con.createStatement();
-            stmt.executeUpdate("Insert into entries (user, address, city, country, price, title, description, photo) Values ('"+userId+"','"+address+"','"+city+"','"+country+"','"+price+"','"+title+"','"+description+"','"+photo+"')");
+            stmt.executeUpdate("Delete from entries where id="+id);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally{
@@ -34,6 +31,5 @@ public class AddEntry {
         }
         
     }
-    
     
 }

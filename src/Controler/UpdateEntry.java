@@ -11,17 +11,16 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 
-public class AddEntry {
-    
-    public AddEntry(String title, int price, String country, String city, String address, int userId, String description) {
+public class UpdateEntry {
+    public UpdateEntry (int id, String title, int price, String description){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
         Statement stmt = null;
-        String photo = "C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/photos/entries/no_photo.png";
         try {
             con = ds.getConnection();
             stmt = con.createStatement();
-            stmt.executeUpdate("Insert into entries (user, address, city, country, price, title, description, photo) Values ('"+userId+"','"+address+"','"+city+"','"+country+"','"+price+"','"+title+"','"+description+"','"+photo+"')");
+                stmt.executeUpdate("Update entries Set title='"+title+"', price='"+price+"', description='"+description+"' Where id="+id);
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }finally{
@@ -34,6 +33,5 @@ public class AddEntry {
         }
         
     }
-    
     
 }

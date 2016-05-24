@@ -1,6 +1,7 @@
 package View;
 
 import Controler.Interest;
+import static Controler.Interest.CheckUniqueInterest;
 import Controler.SearchEntries;
 import Model.Entry;
 import java.awt.Color;
@@ -70,6 +71,7 @@ public class Entries extends javax.swing.JFrame {
             innerBoxFirst.add(new JLabel("Country: " + temp.getCountry()));
             innerBoxFirst.add(new JLabel("Price: " + temp.getPrice() + "€"));
             JButton button = new JButton("Ενδιαφέρομαι !");
+            if (CheckUniqueInterest(temp.getId())) button.setEnabled(false);
             button.addActionListener( new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)

@@ -3,24 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/CreateEntry.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/SearchEntries.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/ViewMyEntries.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/ViewEntry.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/Comments.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/CreateAccount.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Model/Entry.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/Entries.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/EntriesTest.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/AddEntry.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/Profile.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/View/ProfileSimple.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/Authenticate.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/FindUser.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Model/User.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/Interest.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Model/Comment.java</file>
-            <file>file:/C:/Users/Hrystos/Documents/NetBeansProjects/Methodologia/src/Controler/AddUser.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/Controler/UpdateUser.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/View/ViewMyEntries.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/Controler/SearchEntries.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/View/Entries.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/View/Profile.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/Controler/Interest.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/View/UpdateProfile.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/Controler/UpdateEntry.java</file>
+            <file>file:/X:/Documents/NetBeansProjects/Methodologia/src/View/UpdateEntryView.java</file>
         </group>
     </open-files>
 </project-private>
