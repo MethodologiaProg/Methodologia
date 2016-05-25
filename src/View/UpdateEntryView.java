@@ -3,10 +3,14 @@ package View;
 import Model.Entry;
 import Controler.UpdateEntry;
 
+
 public class UpdateEntryView extends javax.swing.JFrame {
     Entry entry;
     /**
-     * Creates new form UpdateEntry
+     * Creates new form UpdateEntry 
+     * and sets the info of the entry 
+     * in the corresponding jlabels
+     * @param entry the object of the entry
      */
     public UpdateEntryView(Entry entry) {
         initComponents();

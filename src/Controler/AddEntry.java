@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controler;
 
 import java.sql.Connection;
@@ -13,6 +8,17 @@ import javax.sql.DataSource;
 
 public class AddEntry {
     
+    /**
+     *Adds an entry to the database
+     * 
+     * @param title The title of the entry
+     * @param price The price of the entry
+     * @param country The country of the entry
+     * @param city The city of the entry
+     * @param address The address of the entry
+     * @param userId The user id of the entry's owner
+     * @param description A description for the entry
+     */
     public AddEntry(String title, int price, String country, String city, String address, int userId, String description) {
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;

@@ -1,4 +1,3 @@
-
 package Controler;
 
 import java.sql.Connection;
@@ -9,6 +8,14 @@ import javax.sql.DataSource;
 
 public class UpdateUser {
     
+    /**
+     *Updates the information of a user
+     * @param id user id
+     * @param name first name
+     * @param lastName last name
+     * @param email email
+     * @param password password
+     */
     public UpdateUser(int id, String name, String lastName, String email, String password){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;

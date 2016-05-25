@@ -34,6 +34,7 @@ public class ViewMyEntries extends javax.swing.JFrame {
     
     /**
      * Creates new form ViewMyEntries
+     * @param userId the user's id
      */
     public ViewMyEntries(int userId) {
         this.userId = userId;

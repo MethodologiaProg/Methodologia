@@ -36,6 +36,9 @@ public class Login extends javax.swing.JFrame {
           });
     }
     
+    /**
+     * Destroy the form
+     */
     public void DestroyForm(){
         this.dispose();
     }

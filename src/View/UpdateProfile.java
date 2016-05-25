@@ -16,7 +16,10 @@ public class UpdateProfile extends javax.swing.JFrame {
     
     User user;
     /**
-     * Creates new form UpdateProfile
+     * Creates new form UpdateProfile 
+     * and sets the info of the entry 
+     * in the corresponding jlabels
+     * @param user the object user
      */
     public UpdateProfile(User user) {
         initComponents();

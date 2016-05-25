@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
 public class CreateEntry extends javax.swing.JFrame {
     int userId;
     /**
-     * Creates new form CreateEntry
+     * Creates new form CreateEntry 
+     * @param userId the user's id
      */
     public CreateEntry(int userId){
         this.userId = userId;

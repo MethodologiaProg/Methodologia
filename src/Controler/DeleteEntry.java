@@ -6,11 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.sql.DataSource;
 
-
 public class DeleteEntry {
     
-    
-    
+    /**
+     *Deletes an entry from the database
+     * @param id The id of the entry to delete
+     */
     public DeleteEntry(int id){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;

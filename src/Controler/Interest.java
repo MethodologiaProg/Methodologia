@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
-/**
- *
- * @author Hrystos
- */
+
 public class Interest {
     
+    /**
+     *Adds in the database the interest of a user to an entry
+     * @param entryId The id of the entry the user is interested in
+     */
     public Interest(int entryId){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -37,6 +38,11 @@ public class Interest {
         }
     }
     
+    /**
+     * Returns the number of the people interested in a specific entry
+     * @param entryId The if of the entry
+     * @return Int with the number of people interested
+     */
     public static int getNumberOfPeopleInterested(int entryId){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -64,6 +70,11 @@ public class Interest {
         return numOfPeople;        
     }
     
+    /**
+     *Checks if the user has already declare interest on a specific entry
+     * @param id the entry id
+     * @return True if the user hasn't already declare interest, false otherwise
+     */
     public static boolean CheckUniqueInterest(int id){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -93,6 +104,10 @@ public class Interest {
         return rt;
     }
     
+    /**
+     *Finds and returns all the entries the specific user is interested
+     * @return A list of entries the user is interested
+     */
     public static List<Entry> FindEntriesImInterested(){
         List<Entry> Entries = new ArrayList<>();
         DataSource ds = ConnectToDatabase.getDatasource();

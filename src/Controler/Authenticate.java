@@ -11,9 +11,19 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
+
 public class Authenticate {
+
     public static int currentUserId;
     
+    /**
+     * Checks if the email and the password are in the database
+     * If the user authenticated successfully then opens the profile of the user 
+     * 
+     * @param email Email
+     * @param password Password
+     * @return Returns true if the email AND the password are correct. Returns false otherwise.
+     */
     public static boolean Authenticate(String email, String password){
         DataSource ds = ConnectToDatabase.getDatasource();
         User user;

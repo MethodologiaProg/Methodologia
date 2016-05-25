@@ -15,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
-/**
- *
- * @author Hrystos
- */
+
 public class Comments {
     List<Comment> comments = new ArrayList<>();
     
-    
+    /**
+     * Returns the comments of an entry. Requires the entry id.
+     * 
+     * @param entryId The id of the entry you want to get the comments from.
+     * @return The list of the comments
+     */
     public List<Comment> GetComments(int entryId){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -48,7 +50,12 @@ public class Comments {
         }
         return comments; 
     }
-    
+    /**
+     * Add a comment to the database.
+     * 
+     * @param entryId The entry's id the comment intended for.
+     * @param comment The comment as a string
+     */
     public void AddComment(int entryId, String comment){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;

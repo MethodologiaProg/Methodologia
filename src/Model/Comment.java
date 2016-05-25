@@ -1,20 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author Hrystos
- */
 public class Comment {
     private int id;
     private int senterId;
     private int entryId;
     private String message;
     
+    /**
+     *The class of the object comment
+     * 
+     * @param id The id of the comment
+     * @param senterId The id of the user posting the comment
+     * @param entryId The id of the entry the comment meant to be
+     * @param message The message of the comment
+     */
     public Comment(int id, int senterId, int entryId, String message){
         this.id = id;
         this.entryId = entryId;
@@ -22,56 +21,56 @@ public class Comment {
         this.message = message;
     }
 
-    /**
+    /**Get the id
      * @return the id
      */
     public int getId() {
         return id;
     }
 
-    /**
+    /**Set the id
      * @param id the id to set
      */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the senterId
+    /**Get the user id
+     * @return the user id
      */
     public int getSenterId() {
         return senterId;
     }
 
-    /**
-     * @param senterId the senterId to set
+    /**Set the user id
+     * @param senterId the user id to set
      */
     public void setSenterId(int senterId) {
         this.senterId = senterId;
     }
 
-    /**
+    /**Get the entry id
      * @return the entryId
      */
     public int getEntryId() {
         return entryId;
     }
 
-    /**
+    /**Set the entry id
      * @param entryId the entryId to set
      */
     public void setEntryId(int entryId) {
         this.entryId = entryId;
     }
 
-    /**
-     * @return the message
+    /**Get the message as a String
+     * @return as String of the message
      */
     public String getMessage() {
         return message;
     }
 
-    /**
+    /**Set the message as a String
      * @param message the message to set
      */
     public void setMessage(String message) {

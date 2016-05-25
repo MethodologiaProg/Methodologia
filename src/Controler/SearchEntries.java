@@ -1,6 +1,5 @@
 package Controler;
 
-
 import Model.Entry;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,9 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
+
 public class SearchEntries {
     List<Entry> Entries = new ArrayList<>();
     
+    /**
+     *Returns all entries from the database
+     * @return A list of all entries
+     */
     public List<Entry> getAllEntries(){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -39,6 +43,11 @@ public class SearchEntries {
         return Entries;
     }
     
+    /**
+     *Returns all entries including the keyword in either the title or the description
+     * @param keyword The keyword to search entries
+     * @return List of entries
+     */
     public List<Entry> GetEntriesByKeyword(String keyword){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -65,6 +74,11 @@ public class SearchEntries {
         return Entries;
     }
     
+    /**
+     *Returns all entries which their price is less Or equal of th parameter
+     * @param price the price
+     * @return A list of entries meeting the parameter
+     */
     public List<Entry> GetEntriesByPrice(int price){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -92,6 +106,11 @@ public class SearchEntries {
         
     }
     
+    /**
+     *Return all the entries of a single user
+     * @param userId the user's id
+     * @return A list of entries 
+     */
     public List<Entry> GetEntriesById(int userId){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;
@@ -118,6 +137,12 @@ public class SearchEntries {
         return Entries; 
     }
     
+    /**
+     *Return all entries matching the keyword And the price
+     * @param keyword the keyword
+     * @param price the price
+     * @return A list of entries
+     */
     public List<Entry> GetEntriesByKeywordAndPrice(String keyword, int price){
         DataSource ds = ConnectToDatabase.getDatasource();
         Connection con = null;

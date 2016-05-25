@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-
 public class Entries extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelEntries;
     private javax.swing.JScrollPane jScrollPane1;
@@ -49,6 +48,10 @@ public class Entries extends javax.swing.JFrame {
         blackline = BorderFactory.createLineBorder(Color.black);
         GettingStarted();
     }
+    /**
+     * Shows some messages in order to make the user's
+     * experience friendlier
+     */
     private void GettingStarted(){
         Box box = Box.createVerticalBox();
         box.add(Box.createRigidArea(new Dimension(100,20)));
@@ -63,7 +66,9 @@ public class Entries extends javax.swing.JFrame {
         box2.add(new JLabel("in the title or the description!"));
         jPanelEntries.add(box2);
     }
-    
+    /**
+     * Shows the entries
+     */
     private void PrintEntries(){
         entries.stream().forEach((Entry temp) -> {  
             Box outerBox = Box.createHorizontalBox();
