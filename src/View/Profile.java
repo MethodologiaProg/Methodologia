@@ -56,7 +56,7 @@ public class Profile extends javax.swing.JFrame {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(user.getPhoto()));
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,6 +91,7 @@ public class Profile extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Profile");
+        setLocation(new java.awt.Point(0, 0));
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
